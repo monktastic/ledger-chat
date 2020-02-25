@@ -1,7 +1,28 @@
 import m from "mithril"
+//import chatbox from "./chatbox"
+var chatbox = require("./chatbox")
+import messagebox from "./messagebox"
 
 var wsUrl = 'ws://localhost:8765';
 var webSocket = new WebSocket(wsUrl);
+
+
+var root = document.body
+
+var Chat = {
+    oninit: function() {
+    },
+    view: function() {
+        return m("main", [
+            m(chatbox),
+            m(messagebox),
+        ])
+    }
+}
+
+m.mount(root, Chat)
+
+// TODO mithril'ify all this.
 
 var chatBox = document.getElementById('chatbox')
 
@@ -20,6 +41,7 @@ webSocket.onerror = function(event) {
     console.log("ws error", event)
 }
 
+
 // Must attach to window for parcel to make it available
 window.sendMsg = event => {
     var message = document.getElementById('message').value
@@ -36,27 +58,4 @@ window.sendMsg = event => {
 
 var msgBox = document.getElementById('messagebox')
 msgBox.addEventListener("submit", sendMsg);
-
-
-// var root = document.body
-
-// m.render(root, "Hello world")
-// m.render(root, m("h1", "My first app"))
-
-// m.render(root, m("main", [
-//     m("h1", {class: "title"}, "My second app"),
-//     m("button", "A button"),
-// ]))
-
-// var count = 0
-// var Hello = {
-//     view: function() {
-//         return m("main", [
-//             m("h1", {class: "title"}, "My third app"),
-//             m("button", {onclick: function() {count++}}, count + " clicks")
-//         ])
-//     }
-// }
-
-// m.mount(root, Hello)
 

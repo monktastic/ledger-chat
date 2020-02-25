@@ -1,0 +1,11 @@
+
+.chatbox {
+    background-color: lightblue;
+    border: 2px solid black;
+    height: 250px;
+    overflow: scroll;
+}
+
+.chat-input {
+    width: 100%;
+}
